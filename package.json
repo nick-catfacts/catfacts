@@ -1,0 +1,32 @@
+{
+  "name": "my-webapp",
+  "version": "0.0.0",
+  "description": "Website for my new app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo 'Error: no test specified' && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "cookie-parser": "^1.4.3",
+    "csurf": "^1.9.0",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "express-ejs-layouts": "^2.2.0",
+    "express-stormpath": "^3.1.5",
+    "font-awesome": "^4.6.3",
+    "forms": "^1.2.0",
+    "jade": "^1.11.0",
+    "jquery": "^3.1.1",
+    "xtend": "^4.0.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "/"
+  }
+}

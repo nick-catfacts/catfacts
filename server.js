@@ -12,10 +12,9 @@ app.set('layout', 'layouts/layout');
 
 
 // static asset frontend setup
-app.use('/vendor/js',    express.static('node_modules/jquery/dist')); // redirect JS jQuery
-app.use('/vendor/js',    express.static('node_modules/bootstrap/dist/js')); // redirect bootstrap JS
-app.use('/vendor/css',   express.static('node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
-app.use('/vendor/css',   express.static('node_modules/font-awesome/css')); // redirect CSS bootstrap
+app.use('/vendor/jquery',    express.static('node_modules/jquery/dist')); // redirect JS jQuery
+app.use('/vendor/bootstrap',    express.static('node_modules/bootstrap/dist')); // redirect bootstrap JS
+app.use('/vendor/font-awesome',   express.static('node_modules/font-awesome')); // redirect CSS bootstrap
 app.use(express.static('public'));
 
 // stormpath init

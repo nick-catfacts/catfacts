@@ -4,12 +4,13 @@
     <meta charset="utf-8" />
     <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mutant.city</title>
+    <title><%= config.site.title %></title>
 
 
     <!-- frontend libs -->
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/vendor/bootswatch.min.css">
+    <link rel="stylesheet" href="/css/simple_sidebar.css">
     <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
     <!--custom css -->
     <link rel="stylesheet" href="/css/main.css">
@@ -40,6 +41,16 @@
     <!-- frontend libs -->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/vendor/bootstrap-validator/validator.min.js"></script>
+    <script src="/js/main.js"></script>
+
+
+
+    <script>
+        // required due to stormpath logout being a post.
+        var form = $('<form action="/logout" method="post" id="mutant_logout">');
+        $( "body" ).append(form);
+    </script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>

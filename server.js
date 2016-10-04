@@ -1,21 +1,18 @@
 'use strict';
 
-var async = require('async');
+
+// start app
 var express = require('express');
+var app = express();
+var async = require('async');
 var stormpath = require('express-stormpath');
-var stripe = require('stripe');
+var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 var twilio = require('twilio');
 var express_layouts = require('express-ejs-layouts');
 var path = require('path');
 
-
-// start app
-var app = express();
-
-
-
 //ENV variables
-app.locals.config = require('./config');
+app.locals.config = require('./config');;
 
 // Node allows requiring of json and automatically parses!!!!
 // Not used in the app, Just here to remind me about it because it's cool.
@@ -32,8 +29,33 @@ app.use('/vendor/jquery',    express.static('node_modules/jquery/dist')); // red
 app.use('/vendor/bootstrap',    express.static('node_modules/bootstrap/dist')); // redirect bootstrap JS
 app.use('/vendor/font-awesome',   express.static('node_modules/font-awesome')); // redirect CSS bootstrap
 app.use('/vendor/bootstrap-validator',   express.static('node_modules/bootstrap-validator/dist')); // redirect CSS bootstrap
-
 app.use(express.static('assets'));
+
+
+// lining up tasks for async.
+var create_new_stripe_customer = function(account, callback){
+  stripe.customers.create({
+      description: "Account for " + account.email
+    },
+    function(err, customer) {
+      // asynchronously called upon completion
+      //console.log(err);
+      account.customData.stripe_id = customer.id;
+      console.log(customer);
+      if (err) return callback(err);
+      callback();
+  });
+};
+
+var save_new_stormpath_account = function(account, callback){
+    account.customData.balance = 0;
+    account.customData.totalMessagesUsed = 0;
+    account.customData.totalMessagesRemaining = 0;
+    account.customData.save(function(err) {
+      if (err) return callback(err);
+      callback();
+    });
+};
 
 // stormpath init
 app.use(stormpath.init(app, {
@@ -45,8 +67,30 @@ app.use(stormpath.init(app, {
       view: 'views/auth/login.jade', // My custom login view
       nextUri: '/dashboard' // this is uri that is visited on successful login
     }
+  },
+  postLoginHandler: function(account, req, res, next) {
+
+    async.series([
+      function(callback){
+          create_new_stripe_customer(account, callback)
+        },
+      function(callback){
+          save_new_stormpath_account(account, callback)
+        }
+      ],
+      function(err) { //This is the final callback
+          if(err) console.log( err );
+          console.log(account);
+          console.log('Final Callback!!');
+      });
+
+    next();
   }
 }));
+
+
+
+
 
 
 
@@ -76,12 +120,11 @@ app.use('/', publicRoutes);
 
 //dashboard
 var private_pages = require('./pages/private/private');
-
-
 app.use('/dashboard', stormpath.loginRequired, private_pages);
 
 
 app.get('/test', function(req, res) {
+  console.log('This is a test page!');
   res.render('public/test');
 });
 

@@ -39,17 +39,21 @@
     </div>
 
     <!-- frontend libs -->
+
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="/vendor/bootstrap-validator/validator.min.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script src="/js/main.js"></script>
-
-
-
     <script>
         // required due to stormpath logout being a post.
         var form = $('<form action="/logout" method="post" id="mutant_logout">');
         $( "body" ).append(form);
+    </script>
+
+
+    <script type="text/javascript">
+        Stripe.setPublishableKey('<%= process.env.STRIPE_PUBLISHABLE_KEY %>');
     </script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

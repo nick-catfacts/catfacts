@@ -107,9 +107,10 @@ router.post('/', function(req, res){
   req.user.customData.save();
   req.user.save(function(err){
     console.log(err);
+    res.redirect('back');
   });
 
-  res.redirect(req.baseUrl);
+  //res.redirect('/dashboard/profile/edit');
 }); //end router.all method
 
 

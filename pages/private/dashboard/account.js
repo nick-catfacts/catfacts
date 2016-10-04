@@ -3,18 +3,18 @@ var router = express.Router();
 
 
 var profile_locals = function(req, res, next){
-  res.locals.sidebar_selected = 'payment';
+  res.locals.sidebar_selected = 'account';
   next();
 }
 router.use(profile_locals);
 
 
 // Routes
-var index = require('./payment/index');
+var index = require('./account/index');
 router.use('/', index );
 
-var add = require('./payment/add');
-router.use('/add', add);
+var add = require('./account/add');
+router.use('/add', add)
 
 // Exports
 module.exports = router;

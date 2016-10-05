@@ -1,0 +1,4 @@
+// Node allows requiring of json and automatically parses!!!!
+// Not used in the app, Just here to remind me about it because it's cool.
+app.locals.json_parse_test = require('./config.json');
+

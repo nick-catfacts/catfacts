@@ -60,6 +60,13 @@ var save_new_stormpath_account = function(account, callback){
 
 // stormpath init
 app.use(stormpath.init(app, {
+  apiKey: {
+    id: process.env.STORMPATH_CLIENT_APIKEY_ID,
+    secret: process.env.STORMPATH_CLIENT_APIKEY_SECRET
+  },
+  application: {
+    href: process.env.STORMPATH_APPLICATION_HREF
+  },
   expand: {
     customData: true
   },

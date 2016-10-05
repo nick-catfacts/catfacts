@@ -51,6 +51,7 @@ var save_new_stormpath_account = function(account, callback){
     account.customData.balance = 0;
     account.customData.totalMessagesUsed = 0;
     account.customData.totalMessagesRemaining = 0;
+    account.customData.recipients={};
     account.customData.save(function(err) {
       if (err) return callback(err);
       callback();

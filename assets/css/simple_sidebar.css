@@ -4,6 +4,15 @@
     color: #fff;
     background: none;
     font-size: 18px;
+
+}
+
+.sidebar-header span{
+        text-decoration: underline;
+}
+
+.sidebar-header-selected{
+    color: #fff;
 }
 
 .sidebar-header a {
@@ -19,6 +28,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     width: auto;
+    color: #999999;
 }
 
 .sidebar-item:hover{
@@ -29,9 +39,7 @@
 .sidebar-selected{
     color: #fff;
 }
-.sidebar-item a {
-    color: #999999;
-}
+
 .sidebar-selected a {
         color: #fff;
 

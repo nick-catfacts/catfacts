@@ -7,12 +7,8 @@ var lodash = require('lodash-node');
  // Routes
 router.get('/', function(req, res) {
 
- var userAccount = lodash.pick(
-    req.user.customData,
-    ['totalMessagesRemaining']
-  )
-
-  res.render('private/dashboard/account/index', {output: userAccount});
+  var output = {stuff: "stuff"}
+  res.render('private/dashboard/dashboard/index', {output: output});
 });
 
 // Exports

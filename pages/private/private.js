@@ -18,34 +18,18 @@ router.use( function(req, res, next){
   next();
 });
 
-router.use( function(req,res,next){
-  stripe.customers.retrieve(
-    req.user.customData.stripe_id,
-    function(err, customer) {
-      if(err) console.log(err);
-      res.locals.stripe_customer = customer;
-      next();
-    }
-  );
-});
 
-router.use( function(req,res,next){
-  stripe.customers.retrieveCard(
-    res.locals.stripe_customer.id,
-    res.locals.stripe_customer.default_source,
-    function(err, card) {
-      if(err) console.log(err);
-      console.log(res.locals.stripe_customer.id);
-      console.log(res.locals.stripe_customer.default_source);
-      res.locals.default_card = card;
-      next();
-    }
-  );
-});
+// dashboard page
+var dashboard_page = require('./dashboard/dashboard');
+router.use('/', dashboard_page)
+
+// recipients page
+var recipients_page = require('./dashboard/recipients');
+router.use('/recipients', recipients_page)
+
 
 //profile page
 var profile_page = require('./dashboard/profile');
-router.use('/', profile_page)
 router.use('/profile', profile_page);
 
 //account page

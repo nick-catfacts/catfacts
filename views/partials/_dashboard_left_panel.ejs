@@ -1,0 +1,64 @@
+<div class="row sidebar-header">
+    <div class = "col-md-12">
+        <a href ="/dashboard">
+            <span class="
+            <% if( sidebar_selected === 'header'){ %>
+             sidebar-header-selected
+            <% } %>">Dashboard</span>
+        </a>
+    </div>
+</div>
+
+<a href ="/dashboard/recipients">
+    <div class="row sidebar-item
+        <% if( sidebar_selected === 'recipients'){ %>
+             sidebar-selected
+        <% } %>">
+
+            <div class = "col-md-12">
+                Recipients
+            </div>
+
+    </div>
+</a>
+
+
+
+
+<a href ="/dashboard/account">
+    <div class="row sidebar-item
+        <% if( sidebar_selected === 'account'){ %>
+             sidebar-selected
+        <% } %>">
+
+            <div class = "col-md-12">
+                Account
+            </div>
+
+    </div>
+</a>
+
+<a href ="/dashboard/profile">
+    <div class="row sidebar-item
+        <% if( sidebar_selected === 'profile'){ %>
+             sidebar-selected
+        <% } %>">
+
+            <div class = "col-md-12">
+                Profile
+            </div>
+
+    </div>
+</a>
+
+
+<a href ="/dashboard/payment">
+    <div class="row sidebar-item
+        <% if( sidebar_selected === 'payment'){ %>
+             sidebar-selected
+        <% } %>">
+            <div class = "col-md-12">
+                Payment Info
+            </div>
+    </div>
+</a>

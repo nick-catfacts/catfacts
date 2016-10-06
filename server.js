@@ -4,13 +4,12 @@
 // start app
 var express = require('express');
 var app = express();
-var async = require('async');
 var stormpath = require('express-stormpath');
 var twilio = require('twilio');
 var express_layouts = require('express-ejs-layouts');
 var path = require('path');
 var http = require('http');
-
+var nick_ecom = require('nick_ecommerce');
 
 //ENV variables
 app.locals.config = require('./config');;
@@ -47,29 +46,12 @@ app.use(stormpath.init(app, {
       nextUri: '/dashboard' // this is uri that is visited on successful login
     }
   },
-
   postLoginHandler: function(account, req, res, next) {
-    async.series([
-      function(callback){
-          create_new_stripe_customer(account, callback)
-        },
-      function(callback){
-          save_new_stormpath_account(account, callback)
-        }
-      ],
-      function(err) { //This is the final callback
-          if(err) console.log( err );
-          console.log(account);
-          console.log('Final Callback!!');
-      });
-
-    next();
+    nick_ecom.create_customer(
+      req.user.name,
+    );
   }
 }));
-
-
-
-
 
 
 

@@ -28,6 +28,7 @@
     "jade": "^1.11.0",
     "jquery": "^3.1.1",
     "lodash-node": "^3.10.2",
+    "nick_ecommerce": "git+ssh://git@github.com/nkiermaier/nick_ecommerce.git",
     "request": "^2.75.0",
     "schema-client": "^2.2.1",
     "stripe": "^4.11.0",

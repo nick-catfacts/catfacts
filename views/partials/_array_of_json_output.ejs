@@ -1,0 +1,17 @@
+<% var headers = Object.keys(array_of_json_output[0]) %>
+<table class="table table-condensed">
+  <tr style = "border-bottom:0px solid ">
+    <% for (var i = 0; i < headers.length; i++) { %>
+      <th><%= headers[i] %></th>
+    <% } %>
+  </tr>
+
+    <% for (var i = 0; i < array_of_json_output.length; i++) { %>
+      <tr>
+           <% Object.keys(array_of_json_output[i]).forEach(function(key) { %>
+            <td> <%= array_of_json_output[i][key] %></td>
+          <% }); %>
+      </tr>
+    <% } %>
+
+</table>

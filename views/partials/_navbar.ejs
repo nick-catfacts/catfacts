@@ -15,11 +15,7 @@
       </button>
        <div style="overflow:hidden; white-space: nowrap;">
             <a class="navbar-brand" href="/">
-            <% if( user.is_login ) { %>
-              Welcome back, <%= user.givenName %>.
-            <%} else {%>
               Welcome to <%= config.site.title %>!
-            <% } %>
             </a>
         </div>
     </div>
@@ -27,7 +23,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li>
-        <% if( user.is_login ) { %>
+        <% if(is_login) { %>
           <a href="/dashboard">
             <i class="fa fa-user" aria-hidden="true"></i>
             <span> Dashboard </span>

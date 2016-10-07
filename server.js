@@ -46,26 +46,40 @@ app.use(stormpath.init(app, {
       nextUri: '/dashboard' // this is uri that is visited on successful login
     }
   },
-  postLoginHandler: function(account, req, res, next) {
-    nick_ecom.create_customer(
-      req.user.name,
-    );
+  postRegistationHandler: function(account, req, res, next){
+    var username = req.user.username;
+    var stormpath_id = req.user.username;
+    // this creates a stripe user and a user in the local mongo db
+    // see nick_ecommerce index.js
+    nick_ecom.create_customer(username, stormpath_id, function(err, result){
+      next();
+    })
   }
-}));
+}))
 
 
+// get the user
+app.use(stormpath.getUser);
 
-// get response locals here available to views
-app.get('*', stormpath.getUser, function(req, res, next) {
-  // set user related variables
-    if (typeof res.locals.user === 'undefined') {
-      res.locals.user = 'false'
+
+app.use(function(req, res, next){
+    if (req.user) {
+      // app globals
+      // set is_login to true
+      res.locals.is_login = true;
+      // set the customer on the local.user object
+      nick_ecom.fetch_customer(req.user.username, function(err, db_user){
+        req.local={};
+        req.local.user = db_user;
+        console.log("Page view: " + req.local.user.username);
+        return next();
+      });
     }
     else {
-      res.locals.user.is_login = true
+      res.locals.is_login = false;
+      return next();
     }
-  next()
-});
+})
 
 
 

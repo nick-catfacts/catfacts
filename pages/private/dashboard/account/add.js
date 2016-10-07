@@ -4,19 +4,8 @@ var lodash = require('lodash-node');
 var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 var bodyParser = require('body-parser');
 var async = require('async');
+var nick_ecom = require('nick_ecommerce');
 
-
-
-router.use( function(req,res,next){
-  stripe.customers.retrieve(
-    req.user.customData.stripe_id,
-    function(err, customer) {
-      if(err) console.log(err);
-      res.locals.stripe_customer = customer;
-      next();
-    }
-  );
-});
 
 
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -30,13 +19,13 @@ router.post('/', function(req, res) {
       function(callback){
         charge_stripe_customer(
             req.body.charge_amt,
-            res.locals.stripe_customer.id,
+            req.local.user.service_id.stripe,
             callback
         )
       },
       function(callback){
           var amount = dollars_to_messages(req.body.charge_amt);
-          add_messages( req.user, amount, callback)
+          nick_ecom.add_messages(req.local.user.username, amount);
         }
       ],
       function(err) { //This is the final callback
@@ -73,6 +62,8 @@ var add_messages = function(account, num_msg_to_add, callback){
       callback();
     });
 };
+
+
 
 var dollars_to_messages = function(dollars){
   var msgs = (dollars / process.env.COST_PER_MESSAGE);

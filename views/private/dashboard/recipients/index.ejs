@@ -5,51 +5,14 @@
           <% include ../../../partials/_dashboard_left_panel %>
         </div>
 
-      <div class="col-md-3">
-        <% include ../../../partials/_output_info %>
+      <div class="col-md-7">
+      <caption>Your Cat Facts recipients:</caption>
+
+        <% include ../../../partials/_array_of_json_output %>
+      </div>
+
+      <div class = "col-md-2">
+        <% include ./_add_recipient_form %>
       </div>
   </div>
-
-    <form action="/dashboard/recipients/add" method="post">
-
-      <div class="row">
-        <div class="col-md-2 col-md-offset-2">
-          <div class="form-group">
-            <label for="recipient_first_name" >First Name</label>
-            <input type="text"
-              class="form-control"
-              id="recipient_first_name"
-              name="recipient_first_name"
-              placeholder="Jane Doe">
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="form-group">
-            <label for="recipient_last_name" >Last Name</label>
-            <input type="text"
-              class="form-control"
-              id="recipient_last_name"
-              name="recipient_last_name"
-              placeholder="Jane Doe">
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="form-group">
-            <label for="recipient_phone">Phone Number(ex: 415-555-1987)</label>
-            <input type="phone"
-              class="form-control"
-              id="recipient_phone"
-              name="recipient_phone"
-              placeholder="888-888-8888">
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-2 col-md-offset-2">
-          <button type="submit" class="btn btn-default">Add recipient</button>
-        </div>
-      </div>
-
-    </form>
 </div>

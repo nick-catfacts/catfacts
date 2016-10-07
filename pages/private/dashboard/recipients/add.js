@@ -28,18 +28,18 @@ router.post('/', function(req, res){
   // if (errors) {
   //   console.log(errors);
   // }
+
   var recipient_name = req.body.recipient_first_name + " " + req.body.recipient_last_name;
-  var recipient_phone = req.body.recipient_phone;
+  var recipient_phone = req.body.recipient_phone.replace(/\D/g,'');
 
-  req.user.customData.recipients[recipient_name] = recipient_phone;
-  req.user.customData.save();
+  req.local.user.recipients.push({ name: recipient_name, phone: recipient_phone })
 
-  req.user.save(function(err){
+  req.local.user.save(function(err){
     if(err){
       console.log(err);
     } else {
-      console.log("Recipient Saved Successfully");
-      console.log(req.user.customData);
+      console.log("New Recipient Saved Successfully");
+      console.log(req.local.user);
     }
     res.redirect('back');
   });

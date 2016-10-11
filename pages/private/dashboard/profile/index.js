@@ -9,13 +9,13 @@ router.get('/', function(req, res) {
 
   // pick out certain fields from the request objects
   user_info = lodash.pick(
-    req.user,
-    ['username', 'email','givenName', 'surname', 'createdAt']
+    req.local.user,
+    ['username', 'first_name', 'last_name' ]/*, 'createdAt' 'email.primary',*/
   )
 
   address = lodash.pick(
-    req.user.customData,
-    ['streetAddress', 'city','state', 'zip']
+    req.local.user.mailing_address,
+    ['street', 'city','state', 'zip']
   )
 
   // this combines the two arrays into one variable which is passed to the view

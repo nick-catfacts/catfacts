@@ -1,0 +1,8 @@
+<table class="table-condensed table">
+  <% Object.keys(payment_info).forEach(function(key) { %>
+    <tr>
+      <td> <%= deCamelCaser(key) %> </td>
+      <td> <%= payment_info[key] %> </td>
+    </tr>
+  <% }); %>
+</table>

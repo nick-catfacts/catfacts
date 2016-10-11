@@ -1,19 +1,52 @@
 <div class ="container-fluid">
-    <div class="row">
 
-          <div class="col-md-2" >
-            <% include ../../../partials/_dashboard_left_panel %>
-          </div>
+  <div class="row">
+    <div class="col-md-9">
 
-        <div class="col-md-3">
-          <% include ../../../partials/_output_info %>
-        </div>
+            <%# Username Pane %>
+            <div class = "row">
+              <div class="col-md-12">
+                <h4 style="margin-top:0px"> Hello,  <%= username %>. </h4>
+              </div>
+            </div>
+
+
+
+          <%# Recipients Pane %>
+            <div class ="row">
+              <div class="col-md-6">
+                <h4 style="text-decoration:underline;">Your Cat Facts recipients </h4>
+                <% include ./_output_recipients %>
+              </div>
+              <div class="col-md-6">
+              </div>
+            </div>
+
+          <%# Messages remaining pane %>
+            <div class = "row">
+              <div class="col-md-12">
+                <h4 style="margin-top:0px">
+                  You have <%= messages_remaining.messages_remaining%> cat facts remaining. %>
+                </h4>
+              </div>
+            </div>
+
+            <%# Increase Messages Pane %>
+            <div class="row">
+              <div class="col-md-12">
+                <% include ./_increase_msg_buttons %>
+              </div>
+            </div>
+
     </div>
 
-    <div class="row">
-       <div class="col-md-2 col-md-offset-2">
-          <a class="btn btn-success" href="/dashboard/payment/add" role="button">
-           Test Button
-          </a>
-      </div>
+
+
+    <div class="col-md-3">
+        <% include ./_output_payment_info %>
     </div>
+
+
+
+  </div>
+</div>

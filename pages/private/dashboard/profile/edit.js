@@ -19,21 +19,21 @@ router.use(csurf({ cookie: true }));
 
 // map form data fields to stormpath data fields
 // this must match the  fields in profileForm below
-var formFieldMap = {
-  firstName: "givenName",
-  lastName: "surname",
-  streetAddress: "streetAddress",
-  city: "city",
-  state: "state",
-  zip: "zip"
-}
+var formMap = [
+  { name:"first_name" , value: ""},
+  { name:"last_name" , value: ""},
+  { name:"street" , value: ""},
+  { name:"city" , value: ""},
+  { name:"state" , value: ""},
+  { name: "zip", value: ""},
+]
 
 
 // populate a object with stormpath data,
 // sp is the stormpath user object, typically res.user
 var formData = function(sp){
   var formData = {
-    firstName: sp.givenName,
+    firstName: sp.first_name,
     lastName:  sp.surname,
     streetAddress: sp.customData.streetAddress,
     city: sp.customData.city,
@@ -48,9 +48,9 @@ var formData = function(sp){
 router.get('/', function(req, res) {
   // our object
   res.locals.form={};
-  // add the data map to the form
-  res.locals.form.map = formFieldMap;
-  // add the initial values from the stormpath user object
+  // this populates the name values
+  res.locals.form.map = formMap;
+  // this populates thedata
   res.locals.form.data=formData(req.user);
   // add the csrf token
   res.locals.csrfToken= req.csrfToken();

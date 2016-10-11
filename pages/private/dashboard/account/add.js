@@ -25,13 +25,28 @@ router.post('/', function(req, res) {
       },
       function(callback){
           var amount = dollars_to_messages(req.body.charge_amt);
-          nick_ecom.add_messages(req.local.user.username, amount);
+          nick_ecom.add_messages(req.local.user.username, amount,
+            function(err, user){
+              if(err) {
+                return callback(err);
+              } else{
+                console.log("Messages added to User in database.")
+                console.log(user)
+                return callback()
+              }
+            }
+          );
         }
       ],
       function(err) { //This is the final callback
-          if(err) console.log( err );
-          console.log('Final Callback!! Messages added successfully!!!');
-          res.redirect('/dashboard/account');
+          if(err) {
+            return console.log( err );
+          }
+            else{
+            console.log('Final Callback!! Messages added successfully!!!');
+            res.redirect('/dashboard/account');
+          }
+
       });
 });
 
